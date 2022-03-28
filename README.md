@@ -4,6 +4,8 @@
 Inspired by Costin Stroie's Arduino code for Bell 103 300 Baud modem at https://github.com/cstroie/Arabell300
 I've uploaded version 3.59 of that code, with (hopefully) improved debugging options for testing alternative decoders.
 
+I finally got a Fourier transform decoder to work with Costin Stroie's modem code, but it still has a high error rate when two of these modems are used to talk to each other. I tracked this down to the poor quality of the PCM tone generator and simple low pass filter. There is simply to much high frequency contamination from the 62.5 kHz PCM signal, and the tone generator needs to be replaced with a better one.
+
 
 The Fourier Transform method posted here has much lower error rate for character decoding than the delay queue/correlation method used above, but is too slow for a 16 MHz Arduino.  On a 16 MHz Arduino, the FT decoder takes about 600 microseconds to decide if a bit is 0 or 1, so the MCU clock rate has to be about 10X higher.
 
